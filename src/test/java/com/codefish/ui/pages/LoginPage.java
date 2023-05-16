@@ -1,6 +1,7 @@
 package com.codefish.ui.pages;
 
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,12 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.BrowserUtils;
 import utils.DriverHelper;
 
+import java.sql.Driver;
 import java.time.Duration;
 
 public class LoginPage {
-    WebDriver driver;
+    WebDriver driver = DriverHelper.getDriver();
 
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -34,9 +37,7 @@ public class LoginPage {
     WebElement logoutButton;
 
 
-    public void login(String username, String password) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        this.username = wait.until(ExpectedConditions.visibilityOf(this.username));
+    public void login(String username, String password) throws InterruptedException {
         this.username.clear();
         this.password.clear();
         this.username.sendKeys(username);
@@ -44,11 +45,18 @@ public class LoginPage {
         loginButton.click();
     }
 
-    public String loginValidateTitle() {
-        return driver.getTitle();
+    public void loginValidateTitle(String expectedTitle) throws InterruptedException {
+        Assert.assertEquals(expectedTitle, driver.getTitle().trim());
+        System.out.println("test");
+        }
+
+    public void logout (){
+        logoutButton.click();
     }
 
     public String loginValidateMessage() {
         return errorMessage.getText();
     }
+
+
 }

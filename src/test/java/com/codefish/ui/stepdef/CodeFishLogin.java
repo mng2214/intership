@@ -12,26 +12,29 @@ public class CodeFishLogin {
     WebDriver driver = DriverHelper.getDriver();
     LoginPage loginPage = new LoginPage(driver);
 
-    @When("User logins with correct credentials")
-    public void userLoginsWithCorrectCredentials() {
-        loginPage.login(ConfigReader.readProperty("username"), ConfigReader.readProperty("password"));
+    @When("User logins with correct credentials and login")
+    public void userLoginsWithCorrectCredentialsAndLogin() throws InterruptedException {
+        loginPage.login(
+                ConfigReader.readProperty("username"),
+                ConfigReader.readProperty("password"));
+        //loginPage.login("admin","admin");
     }
 
     @Then("User validates title {string}")
-    public void userValidatesTitle(String title) {
-        System.out.println(loginPage.loginValidateTitle());
+    public void userValidatesTitle(String title) throws InterruptedException {
+        loginPage.loginValidateTitle(title);
+        loginPage.logout();
     }
 
-
-    @When("User provides negative {string} and {string}")
-    public void userProvidesNegativeAnd(String username, String password) {
-
+    @When("User provides negative {string} and {string} and login")
+    public void userProvidesNegativeAndAndLogin(String username, String password) throws InterruptedException {
+        loginPage.login(username, password);
     }
+
     @Then("User validates message {string}")
-    public void userValidatesMessage(String string) {
-
+    public void userValidatesMessage(String message) {
+        Assert.assertEquals(message, loginPage.loginValidateMessage());
     }
-
 
 
 }
