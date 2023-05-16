@@ -55,7 +55,7 @@ public class LoginPage {
     }
 
 
-    public void negativeLogin(String username, String password) {
+    public void negativeLogin(String username, String password)  {
         this.username.clear();
         this.username.sendKeys(username);
         this.password.clear();

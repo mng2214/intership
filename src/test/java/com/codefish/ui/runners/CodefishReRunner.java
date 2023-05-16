@@ -11,6 +11,5 @@ import org.junit.runner.RunWith;
         tags = "@smoke , @regression",
         plugin = {"pretty", "html:target/uiReport.html", "rerun:target/uiFailedTests.txt"}
 )
-
 public class CodefishReRunner {
 }

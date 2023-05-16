@@ -25,7 +25,7 @@ public class CodeFishLogin {
     }
 
     @When("User provides negative {string} and {string}")
-    public void userProvidesNegativeAnd(String username, String password) {
+    public void userProvidesNegativeAnd(String username, String password)  {
         loginPage.negativeLogin(username, password);
     }
 
