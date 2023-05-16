@@ -22,7 +22,25 @@ public class SearchPage {
     @FindBy(xpath = "//div[@class='card-body']//h5")
     List<WebElement> items;
 
-    String itemName ;
+    String itemName;
+
+    @FindBy(xpath = "//button[.='Vaccines']")
+    WebElement vaccines;
+    @FindBy(xpath = "//button[.='Drugs']")
+    WebElement drugs;
+    @FindBy(xpath = "//button[.='Tools']")
+    WebElement tools;
+    @FindBy(xpath = "//button[.='Machinery']")
+    WebElement machinery;
+
+    @FindBy(xpath = "//div[@class='row disp']//img")
+    List<WebElement> itemsCategory;
+
+    String vaccinesImg = "https://i.imgur.com/kyk8KtZ.png";
+    String drugsImg = "https://i.imgur.com/ErbeACQ.png";
+    String toolsImg = "https://i.imgur.com/ra3HVae.png";
+    String MachineryImg = "https://i.imgur.com/VMpECDT.png";
+
 
     public void searchItemPositiveValidation(String itemName) {
         this.itemName = itemName;
@@ -33,5 +51,11 @@ public class SearchPage {
         }
     }
 
+    public void categoryFunctionality() {
+        vaccines.click();
+        for (WebElement itemCategory : itemsCategory) {
+            System.out.println(itemCategory.getAttribute("src"));
+        }
+    }
 
 }

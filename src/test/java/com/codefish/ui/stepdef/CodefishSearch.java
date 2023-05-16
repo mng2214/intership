@@ -25,5 +25,8 @@ public class CodefishSearch {
     }
 
 
-
+    @Then("User switch search by category and validates items belongs to current category")
+    public void userSwitchSearchByCategoryAndValidatesItemsBelongsToCurrentCategory() {
+        searchPage.categoryFunctionality();
+    }
 }
