@@ -7,18 +7,21 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.time.Duration;
+
 public class DriverHelper {
 
     private static WebDriver driver;
 
-    private DriverHelper(){}
+    private DriverHelper() {
+    }
     //I make my constructor private because I do not want anyone to create an object
     //and manipulate my driver from this class.
 
-    public static WebDriver getDriver(){
-        if(driver==null|| ((RemoteWebDriver)driver).getSessionId()==null){
-            String browser=ConfigReader.readProperty("browser");
-            switch (browser){
+    public static WebDriver getDriver() {
+        if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
+            String browser = ConfigReader.readProperty("browser");
+            switch (browser) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
@@ -37,11 +40,10 @@ public class DriverHelper {
                     break;
             }
             driver.manage().window().maximize();
-         //   driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
         return driver;
     }
-
 
 
 }

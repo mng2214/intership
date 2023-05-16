@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "",
+        features = "target/uiFailedTests.txt",
         glue = "codefish/ui/stepdef",
         tags = "@smoke , @regression",
         plugin = {"pretty", "html:target/uiReport.html", "rerun:target/uiFailedTests.txt"}
