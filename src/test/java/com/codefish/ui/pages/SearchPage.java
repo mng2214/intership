@@ -1,5 +1,7 @@
 package com.codefish.ui.pages;
 
+import io.cucumber.java.eo.Se;
+import io.cucumber.java.it.Ma;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,8 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.BrowserUtils;
 
-import java.awt.event.KeyEvent;
-import java.util.List;
+import java.util.*;
 
 public class SearchPage {
     public SearchPage(WebDriver driver) {
@@ -33,13 +34,24 @@ public class SearchPage {
     @FindBy(xpath = "//button[.='Machinery']")
     WebElement machinery;
 
+    @FindBy(xpath = "//div[@class='btn-group']//button[@type='button']")
+    List<WebElement> allCategories;
     @FindBy(xpath = "//div[@class='row disp']//img")
-    List<WebElement> itemsCategory;
+    List<WebElement> categoryImages;
 
-    String vaccinesImg = "https://i.imgur.com/kyk8KtZ.png";
-    String drugsImg = "https://i.imgur.com/ErbeACQ.png";
-    String toolsImg = "https://i.imgur.com/ra3HVae.png";
-    String MachineryImg = "https://i.imgur.com/VMpECDT.png";
+//    String vaccinesImg = "https://i.imgur.com/kyk8KtZ.png";
+//    String drugsImg = "https://i.imgur.com/ErbeACQ.png";
+//    String toolsImg = "https://i.imgur.com/ra3HVae.png";
+//    String MachineryImg = "https://i.imgur.com/VMpECDT.png";
+
+    static Set< String> imgUrls = new LinkedHashSet<>();
+
+    public static void linksToList() {
+        imgUrls.add( "https://i.imgur.com/kyk8KtZ.png");
+        imgUrls.add( "https://i.imgur.com/ErbeACQ.png");
+        imgUrls.add( "https://i.imgur.com/ra3HVae.png");
+        imgUrls.add( "https://i.imgur.com/VMpECDT.png");
+    }
 
 
     public void searchItemPositiveValidation(String itemName) {
@@ -52,10 +64,15 @@ public class SearchPage {
     }
 
     public void categoryFunctionality() {
-        vaccines.click();
-        for (WebElement itemCategory : itemsCategory) {
-            System.out.println(itemCategory.getAttribute("src"));
+        SearchPage.linksToList();
+        Set< String> imgUrlsExpected = new LinkedHashSet<>();
+        for (int i = 1; i < allCategories.size(); i++) {
+            allCategories.get(i).click();
+            for (WebElement image : categoryImages) {
+                imgUrlsExpected.add(image.getAttribute("src"));
+            }
         }
+        Assert.assertEquals(imgUrls,imgUrlsExpected);
     }
 
 }

@@ -15,15 +15,14 @@ public class CodefishSearch {
 
 
     @When("User login on the website")
-    public void userLoginOnTheWebsite() {
-        loginPage.positiveLogin();
+    public void userLoginOnTheWebsite()  {
+       loginPage.login();
     }
 
     @Then("User search for item by {string} from catalog and validates it")
     public void userSearchForItemByFromCatalogAndValidatesIt(String itemName) {
         searchPage.searchItemPositiveValidation(itemName);
     }
-
 
     @Then("User switch search by category and validates items belongs to current category")
     public void userSwitchSearchByCategoryAndValidatesItemsBelongsToCurrentCategory() {

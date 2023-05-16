@@ -13,9 +13,9 @@ public class CodeFishLogin {
     LoginPage loginPage = new LoginPage(driver);
 
 
-    @When("User logins with positive correct credentials")
-    public void userLoginsWithPositiveCorrectCredentials() {
-        loginPage.positiveLogin();
+    @When("User provides  correct credentials and login")
+    public void userProvidesCorrectCredentialsAndLogin() {
+        loginPage.login();
     }
 
     @Then("User validates title {string}")
@@ -24,14 +24,15 @@ public class CodeFishLogin {
         loginPage.logout();
     }
 
-    @When("User provides negative {string} and {string}")
-    public void userProvidesNegativeAnd(String username, String password)  {
-        loginPage.negativeLogin(username, password);
+    @When("User provides  {string} and {string} and login")
+    public void userProvidesUsernameAndPasswordAndLogin(String username, String password) {
+        loginPage.loginNegative(username, password);
     }
 
     @Then("User validates message {string}")
     public void userValidatesMessage(String errorMessage) {
         Assert.assertEquals(errorMessage, loginPage.loginValidateMessage());
     }
+
 
 }

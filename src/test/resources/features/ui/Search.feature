@@ -3,7 +3,7 @@ Feature: Codefish search functionality
 
 
   Scenario Outline: Testing positive search functionality
-    When User login on the website
+    When User provides  correct credentials and login
     Then User search for item by '<Item Name>' from catalog and validates it
     Examples:
       | Item Name |

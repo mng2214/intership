@@ -35,16 +35,14 @@ public class LoginPage {
     @FindBy(xpath = "//a[.='Logout']")
     WebElement logoutButton;
 
-
-
-
-    public void positiveLogin() {
-//        this.username.clear();
-//        this.password.clear();
-//        this.username.sendKeys(ConfigReader.readProperty("username"));
-//        this.password.sendKeys(ConfigReader.readProperty("password"));
+    public void login (){
+        this.username.clear();
+        this.username.sendKeys(ConfigReader.readProperty("username"));
+        this.password.clear();
+        this.password.sendKeys(ConfigReader.readProperty("username"));
         loginButton.click();
     }
+
 
     public void loginValidateTitle(String expectedTitle, WebDriver driver) {
         Assert.assertEquals(expectedTitle, driver.getTitle().trim());
@@ -54,8 +52,7 @@ public class LoginPage {
         logoutButton.click();
     }
 
-
-    public void negativeLogin(String username, String password)  {
+    public void loginNegative(String username, String password) {
         this.username.clear();
         this.username.sendKeys(username);
         this.password.clear();
