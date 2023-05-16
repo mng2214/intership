@@ -11,13 +11,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.BrowserUtils;
+import utils.ConfigReader;
 import utils.DriverHelper;
 
 import java.sql.Driver;
 import java.time.Duration;
 
 public class LoginPage {
-    WebDriver driver = DriverHelper.getDriver();
+
 
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -29,29 +30,37 @@ public class LoginPage {
     WebElement password;
     @FindBy(xpath = "//button[@name='loginbtn']")
     WebElement loginButton;
-
-    @FindBy(className = "errorMessage")
+    @FindBy(xpath = "//div[contains(text(),'Authentication failed')]")
     WebElement errorMessage;
-
     @FindBy(xpath = "//a[.='Logout']")
     WebElement logoutButton;
 
 
-    public void login(String username, String password) throws InterruptedException {
-        this.username.clear();
-        this.password.clear();
-        this.username.sendKeys(username);
-        this.password.sendKeys(password);
+
+
+    public void positiveLogin() {
+//        this.username.clear();
+//        this.password.clear();
+//        this.username.sendKeys(ConfigReader.readProperty("username"));
+//        this.password.sendKeys(ConfigReader.readProperty("password"));
         loginButton.click();
     }
 
-    public void loginValidateTitle(String expectedTitle) throws InterruptedException {
+    public void loginValidateTitle(String expectedTitle, WebDriver driver) {
         Assert.assertEquals(expectedTitle, driver.getTitle().trim());
-        System.out.println("test");
-        }
+    }
 
-    public void logout (){
+    public void logout() {
         logoutButton.click();
+    }
+
+
+    public void negativeLogin(String username, String password) {
+        this.username.clear();
+        this.username.sendKeys(username);
+        this.password.clear();
+        this.password.sendKeys(password);
+        loginButton.click();
     }
 
     public String loginValidateMessage() {
